@@ -7,7 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:RAWInspector"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="{Binding Title}"
+    Title="{Binding Title, TargetNullValue='RAW Inspector'}"
     d:DataContext="{d:DesignInstance local:Model}"
     AllowDrop="True"
     Closing="OnClosing"

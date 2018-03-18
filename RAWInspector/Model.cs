@@ -45,7 +45,7 @@ namespace RAWInspector
             get
             {
                 if (Stream == null)
-                    return "No file loaded";
+                    return null;
 
                 var path = Stream.Name;
                 var fileName = Path.GetFileName(path);
