@@ -83,6 +83,25 @@ namespace RAWInspector
 
         #region File helpers
 
+        private static string GetTempPath([NotNull] string path)
+        {
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
+
+            var tempPath = Path.GetTempPath();
+            var fileName = Path.GetFileName(path);
+
+            for (var i = 0; i < byte.MaxValue; i++)
+            {
+                var combine = Path.Combine(tempPath, $"{fileName}.{i}");
+
+                if (!File.Exists(combine))
+                    return combine;
+            }
+
+            throw new InvalidOperationException("Could not generate a path in temporary folder.");
+        }
+
         private static bool TryOpenFile([NotNull] string path, out FileStream result)
         {
             if (path == null)
@@ -110,7 +129,7 @@ namespace RAWInspector
 
             try
             {
-                var tempFileName = Path.GetTempFileName();
+                var tempFileName = GetTempPath(path);
                 File.Copy(path, tempFileName, true);
                 result = tempFileName;
                 return true;
