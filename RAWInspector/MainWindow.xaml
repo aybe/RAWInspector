@@ -12,6 +12,8 @@
     AllowDrop="True"
     Closing="OnClosing"
     DragOver="OnDragOver"
+    SnapsToDevicePixels="True"
+    UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -27,6 +29,17 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid />
+    <Grid>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
+            <Image
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                RenderOptions.BitmapScalingMode="NearestNeighbor"
+                Source="{Binding Bitmap}"
+                Stretch="None" />
+        </ScrollViewer>
+    </Grid>
 
 </Window>

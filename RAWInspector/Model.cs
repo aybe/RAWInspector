@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using JetBrains.Annotations;
@@ -39,6 +41,8 @@ namespace RAWInspector
         private FileStream Stream { get; set; }
 
         private List<string> Streams { get; } = new List<string>();
+
+        public WriteableBitmap Bitmap { get; set; }
 
         public string Title
         {
