@@ -1,28 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RAWInspector
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            (DataContext as IDisposable)?.Dispose();
+        }
+
+        private void OnDragOver(object sender, DragEventArgs e)
+        {
+            e.Handled = true;
+            e.Effects = DragDropEffects.None;
+
+            var format = DataFormats.FileDrop;
+
+            if (!e.Data.GetDataPresent(format))
+                return;
+
+            var data = e.Data.GetData(format);
+
+            var paths = (string[]) data;
+            if (paths == null)
+                return;
+
+            var path = paths.First();
+
+            if (!File.Exists(path))
+                return;
+
+            e.Effects = DragDropEffects.All;
         }
     }
 }
