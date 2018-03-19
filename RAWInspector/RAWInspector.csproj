@@ -87,6 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\ScrollViewerDragBehavior.cs" />
     <Compile Include="Classes\ScrollViewerZoomBehavior.cs" />
     <Compile Include="Interop\Mouse\NativeConstants.cs" />
     <Compile Include="Interop\Mouse\NativeMethods.cs" />
