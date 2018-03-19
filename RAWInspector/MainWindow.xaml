@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Window.DataContext>
-        <local:Model />
+        <local:Model CloseRequest="OnCloseRequest" />
     </Window.DataContext>
 
     <i:Interaction.Triggers>
@@ -47,6 +47,9 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
+                <MenuItem
+                    Command="{Binding Close}"
+                    Header="E_xit" />
             </MenuItem>
         </Menu>
         <ToolBarTray

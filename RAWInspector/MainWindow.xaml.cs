@@ -41,5 +41,10 @@ namespace RAWInspector
 
             e.Effects = DragDropEffects.All;
         }
+
+        private void OnCloseRequest(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

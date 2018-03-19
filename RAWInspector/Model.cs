@@ -17,6 +17,7 @@ namespace RAWInspector
         public Model()
         {
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
+            Close = new RelayCommand<EventArgs>(s => { CloseRequest?.Invoke(this, EventArgs.Empty); });
         }
 
         public void Dispose()
@@ -63,6 +64,10 @@ namespace RAWInspector
         #endregion
 
         #region Commands
+
+        public RelayCommand<EventArgs> Close { get; }
+
+        public event EventHandler CloseRequest;
 
         public RelayCommand<DragEventArgs> Drop { get; }
 
