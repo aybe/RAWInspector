@@ -77,20 +77,17 @@ namespace RAWInspector
 
         #region Methods
 
-        public void UpdateStream([NotNull] FileStream stream)
+        public void UpdateStream([NotNull] FileStream stream, bool temporary)
         {
             Stream?.Dispose();
             Stream = stream ?? throw new ArgumentNullException(nameof(stream));
-            RaisePropertyChanged(() => Stream);
+
+            if (temporary)
+            {
+                Streams.Add(stream.Name);
+            }
+
             RaisePropertyChanged(() => Title);
-        }
-
-        public void UpdateStream([NotNull] string path)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            Streams.Add(path);
         }
 
         #endregion

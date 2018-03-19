@@ -19,6 +19,12 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding
+            Key="O"
+            Command="{Binding Commands.Open}"
+            Modifiers="Control" />
+    </Window.InputBindings>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -47,6 +53,10 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
+                <MenuItem
+                    Command="{Binding Commands.Open}"
+                    Header="_Open"
+                    InputGestureText="Ctrl+O" />
                 <MenuItem
                     Command="{Binding Commands.Close}"
                     Header="E_xit" />

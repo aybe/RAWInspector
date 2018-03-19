@@ -7,7 +7,7 @@ namespace RAWInspector
 {
     internal static class Storage
     {
-        private static string GetTempPath([NotNull] string path)
+        public static string GetTempPath([NotNull] string path)
         {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
@@ -26,70 +26,44 @@ namespace RAWInspector
             throw new InvalidOperationException("Could not generate a path in temporary folder.");
         }
 
-        public static bool TryOpenFile([NotNull] string path, out FileStream result)
+        public static void TryOpenFile([NotNull] string path, out FileStream stream, out bool temporary)
         {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
-            result = null;
+            temporary = false;
+            stream = null;
 
             try
             {
-                result = File.OpenRead(path);
-                return true;
-            }
-            catch (IOException)
-            {
-                return false;
-            }
-        }
-
-        public static bool TryCopyFile([NotNull] string path, out string result)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            result = null;
-
-            try
-            {
-                var tempFileName = GetTempPath(path);
-                File.Copy(path, tempFileName, true);
-                result = tempFileName;
-                return true;
+                stream = File.OpenRead(path);
             }
             catch (Exception)
             {
-                return false;
+                // ignored
             }
-        }
 
-        public static bool TryCopyFileWizard([NotNull] string path, out FileStream result)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
+            if (stream != null)
+                return;
 
-            result = null;
+            const string text = "Would like to copy it to a temporary location ?";
+            const string caption = "File could not be opened";
+            var result = MessageBox.Show(text, caption, MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+                return;
 
-            const string boxText = "Do you want to copy it to a temporary location and open it ?";
-            const string boxCapt = "File could not be opened";
-
-            if (MessageBox.Show(boxText, boxCapt, MessageBoxButton.OKCancel) != MessageBoxResult.OK)
-                return false;
-
-            if (!Storage.TryCopyFile(path, out var copy))
+            try
             {
-                MessageBox.Show("Couldn't copy file to temporary location.", "Error", MessageBoxButton.OK);
-                return false;
+                var fileName = Path.GetFileName(path);
+                var tempPath = Storage.GetTempPath(fileName);
+                File.Copy(path, tempPath);
+                temporary = true;
+                stream = File.OpenRead(tempPath);
             }
-
-            if (!Storage.TryOpenFile(copy, out result))
+            catch (Exception)
             {
-                MessageBox.Show("Couldn't open file.", "Error", MessageBoxButton.OK);
-                return false;
+                // ignored
             }
-
-            return true;
         }
     }
 }

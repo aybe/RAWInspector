@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using JetBrains.Annotations;
+using Microsoft.Win32;
 
 namespace RAWInspector
 {
@@ -16,6 +16,7 @@ namespace RAWInspector
 
             Drop = new ModelCommand<DragEventArgs>(DropExecute);
 
+            Open = new ModelCommand(OpenExecute);
         }
 
         private Model Model { get; }
@@ -24,12 +25,13 @@ namespace RAWInspector
 
         public ModelCommand<DragEventArgs> Drop { get; }
 
+        public ModelCommand Open { get; }
+
         private void CloseExecute(EventArgs e)
         {
             Model.OnCloseRequest();
         }
 
-        [SuppressMessage("ReSharper", "InvertIf")]
         private void DropExecute([NotNull] DragEventArgs e)
         {
             if (e == null)
@@ -38,16 +40,24 @@ namespace RAWInspector
             var paths = (string[]) e.Data.GetData(DataFormats.FileDrop);
             var path = (paths ?? throw new InvalidOperationException()).First();
 
-            if (Storage.TryOpenFile(path, out var stream))
-            {
-                Model. UpdateStream(stream);
-                return;
-            }
+            OpenFile(path);
+        }
 
-            if (Storage.TryCopyFileWizard(path, out stream))
-            {
-                Model.UpdateStream(stream.Name);
-                Model.UpdateStream(stream);
-            }
-        }  }
+        private void OpenExecute()
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() != true)
+                return;
+
+            OpenFile(dialog.FileName);
+        }
+
+        private void OpenFile(string path)
+        {
+            Storage.TryOpenFile(path, out var stream, out var temporary);
+
+            if (stream != null)
+                Model.UpdateStream(stream, temporary);
+        }
+    }
 }
