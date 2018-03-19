@@ -12,7 +12,7 @@ namespace RAWInspector
         {
             Model = model ?? throw new ArgumentNullException(nameof(model));
 
-            Close = new ModelCommand<EventArgs>(s => { Model.OnCloseRequest(); });
+            Close = new ModelCommand<EventArgs>(CloseExecute);
 
             Drop = new ModelCommand<DragEventArgs>(DropExecute);
 
@@ -23,6 +23,11 @@ namespace RAWInspector
         public ModelCommand<EventArgs> Close { get; }
 
         public ModelCommand<DragEventArgs> Drop { get; }
+
+        private void CloseExecute(EventArgs e)
+        {
+            Model.OnCloseRequest();
+        }
 
         [SuppressMessage("ReSharper", "InvertIf")]
         private void DropExecute([NotNull] DragEventArgs e)
