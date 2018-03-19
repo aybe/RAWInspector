@@ -88,6 +88,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\ScrollViewerZoomBehavior.cs" />
+    <Compile Include="Interop\Mouse\NativeConstants.cs" />
+    <Compile Include="Interop\Mouse\NativeMethods.cs" />
+    <Compile Include="Interop\Mouse\Point.cs" />
+    <Compile Include="Interop\Mouse\RawHid.cs" />
+    <Compile Include="Interop\Mouse\RawInput.cs" />
+    <Compile Include="Interop\Mouse\RawInputData.cs" />
+    <Compile Include="Interop\Mouse\RawInputDevice.cs" />
+    <Compile Include="Interop\Mouse\RawInputHeader.cs" />
+    <Compile Include="Interop\Mouse\RawInputType.cs" />
+    <Compile Include="Interop\Mouse\RawKeyboard.cs" />
+    <Compile Include="Interop\Mouse\RawMouse.cs" />
+    <Compile Include="Interop\Mouse\RawMouseButtonFlags.cs" />
+    <Compile Include="Interop\Mouse\RawMouseFlags.cs" />
+    <Compile Include="Interop\Mouse\RawMouseHelper.cs" />
+    <Compile Include="Interop\Mouse\Rect.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
