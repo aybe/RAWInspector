@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using JetBrains.Annotations;
 
 namespace RAWInspector
@@ -18,6 +14,8 @@ namespace RAWInspector
         {
             Commands = new ModelCommands(this);
         }
+
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -35,6 +33,8 @@ namespace RAWInspector
                 }
             }
         }
+
+        #endregion
 
         #region Properties
 
@@ -76,7 +76,7 @@ namespace RAWInspector
         #endregion
 
         #region Methods
-        
+
         public void UpdateStream([NotNull] FileStream stream)
         {
             Stream?.Dispose();
@@ -87,7 +87,7 @@ namespace RAWInspector
 
         public void UpdateStream([NotNull] string path)
         {
-            if (path == null) 
+            if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
             Streams.Add(path);
