@@ -66,11 +66,20 @@ namespace RAWInspector
 
         #endregion
 
+        #region Events
+
+        public event EventHandler CloseRequest;
+
+        public void OnCloseRequest()
+        {
+            CloseRequest?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
         #region Commands
 
         public RelayCommand<EventArgs> Close { get; }
-
-        public event EventHandler CloseRequest;
 
         public RelayCommand<DragEventArgs> Drop { get; }
 
