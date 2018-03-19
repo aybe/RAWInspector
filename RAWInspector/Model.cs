@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -16,8 +17,6 @@ namespace RAWInspector
         public Model()
         {
             Commands = new ModelCommands(this);
-
-            Drop = new RelayCommand<DragEventArgs>(DropExecute);
         }
 
         public void Dispose()
@@ -76,116 +75,22 @@ namespace RAWInspector
 
         #endregion
 
-        #region Commands
-
-        public RelayCommand<DragEventArgs> Drop { get; }
-
-        private void DropExecute([NotNull] DragEventArgs e)
+        #region Methods
+        
+        public void UpdateStream([NotNull] FileStream stream)
         {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            var paths = (string[]) e.Data.GetData(DataFormats.FileDrop);
-            var path = (paths ?? throw new InvalidOperationException()).First();
-
-            if (!TryOpenFile(path, out var stream) && !TryCopyFileWizard(path, out stream))
-                return;
-
             Stream?.Dispose();
-            Stream = stream;
+            Stream = stream ?? throw new ArgumentNullException(nameof(stream));
             RaisePropertyChanged(() => Stream);
             RaisePropertyChanged(() => Title);
         }
 
-        #endregion
-
-        #region File helpers
-
-        private static string GetTempPath([NotNull] string path)
+        public void UpdateStream([NotNull] string path)
         {
-            if (path == null)
+            if (path == null) 
                 throw new ArgumentNullException(nameof(path));
 
-            var tempPath = Path.GetTempPath();
-            var fileName = Path.GetFileName(path);
-
-            for (var i = 0; i < byte.MaxValue; i++)
-            {
-                var combine = Path.Combine(tempPath, $"{fileName}.{i}");
-
-                if (!File.Exists(combine))
-                    return combine;
-            }
-
-            throw new InvalidOperationException("Could not generate a path in temporary folder.");
-        }
-
-        private static bool TryOpenFile([NotNull] string path, out FileStream result)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            result = null;
-
-            try
-            {
-                result = File.OpenRead(path);
-                return true;
-            }
-            catch (IOException)
-            {
-                return false;
-            }
-        }
-
-        private static bool TryCopyFile([NotNull] string path, out string result)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            result = null;
-
-            try
-            {
-                var tempFileName = GetTempPath(path);
-                File.Copy(path, tempFileName, true);
-                result = tempFileName;
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        private bool TryCopyFileWizard([NotNull] string path, out FileStream result)
-        {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-
-            result = null;
-
-            const string boxText = "Do you want to copy it to a temporary location and open it ?";
-            const string boxCapt = "File could not be opened";
-
-            if (MessageBox.Show(boxText, boxCapt, MessageBoxButton.OKCancel) != MessageBoxResult.OK)
-                return false;
-
-            if (!TryCopyFile(path, out var copy))
-            {
-                MessageBox.Show("Couldn't copy file to temporary location.", "Error", MessageBoxButton.OK);
-                return false;
-            }
-
-            Streams.Add(copy);
-
-            if (!TryOpenFile(copy, out result))
-            {
-                MessageBox.Show("Couldn't open file.", "Error", MessageBoxButton.OK);
-                return false;
-            }
-
-            return true;
+            Streams.Add(path);
         }
 
         #endregion

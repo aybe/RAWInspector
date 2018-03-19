@@ -34,7 +34,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Drop">
             <command:EventToCommand
-                Command="{Binding Drop}"
+                Command="{Binding Commands.Drop}"
                 PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
