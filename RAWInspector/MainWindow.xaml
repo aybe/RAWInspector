@@ -48,7 +48,7 @@
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem
-                    Command="{Binding Close}"
+                    Command="{Binding Commands.Close}"
                     Header="E_xit" />
             </MenuItem>
         </Menu>
