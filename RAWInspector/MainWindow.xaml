@@ -19,6 +19,13 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ToolbarStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Window.DataContext>
         <local:Model />
@@ -33,7 +40,23 @@
     </i:Interaction.Triggers>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="_File">
+            </MenuItem>
+        </Menu>
+        <ToolBarTray
+            Grid.Row="1"
+            Style="{DynamicResource ToolBarTrayStyle1}">
+            <ToolBar Style="{DynamicResource ToolBarStyle1}">
+            </ToolBar>
+        </ToolBarTray>
         <ScrollViewer
+            Grid.Row="2"
             HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Auto">
             <i:Interaction.Behaviors>
