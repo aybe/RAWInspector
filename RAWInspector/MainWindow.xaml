@@ -35,8 +35,8 @@
             HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Auto">
             <i:Interaction.Behaviors>
-                <classes:ScrollViewerDragBehavior IsEnabled="True" />
                 <classes:ScrollViewerZoomBehavior />
+                <classes:ScrollViewerDragBehavior />
             </i:Interaction.Behaviors>
             <Image
                 HorizontalAlignment="Left"

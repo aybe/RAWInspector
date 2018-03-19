@@ -15,7 +15,7 @@ namespace RAWInspector.Classes
                 new PropertyMetadata(default(bool)));
 
         public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register(
-            nameof(IsEnabled), typeof(bool), typeof(ScrollViewerDragBehavior), new PropertyMetadata(default(bool)));
+            nameof(IsEnabled), typeof(bool), typeof(ScrollViewerDragBehavior), new PropertyMetadata(true));
 
         [PublicAPI]
         public bool InvertMouseWrap
