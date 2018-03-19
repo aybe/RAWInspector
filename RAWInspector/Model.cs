@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -44,7 +43,8 @@ namespace RAWInspector
 
         private List<string> Streams { get; } = new List<string>();
 
-        public WriteableBitmap Bitmap { get; set; }
+        public WriteableBitmap Bitmap { get; private set; }
+
         public ModelCommands Commands { get; }
 
         public string Title

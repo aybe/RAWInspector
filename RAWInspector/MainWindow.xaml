@@ -55,8 +55,7 @@
         <ToolBarTray
             Grid.Row="1"
             Style="{DynamicResource ToolBarTrayStyle1}">
-            <ToolBar Style="{DynamicResource ToolBarStyle1}">
-            </ToolBar>
+            <ToolBar Style="{DynamicResource ToolBarStyle1}" />
         </ToolBarTray>
         <ScrollViewer
             Grid.Row="2"
