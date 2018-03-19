@@ -16,6 +16,8 @@ namespace RAWInspector
     {
         public Model()
         {
+            Commands = new ModelCommands(this);
+
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
             Close = new RelayCommand<EventArgs>(s => { CloseRequest?.Invoke(this, EventArgs.Empty); });
         }
@@ -44,6 +46,7 @@ namespace RAWInspector
         private List<string> Streams { get; } = new List<string>();
 
         public WriteableBitmap Bitmap { get; set; }
+        public ModelCommands Commands { get; }
 
         public string Title
         {
