@@ -11,6 +11,8 @@ namespace RAWInspector
         public MainWindow()
         {
             InitializeComponent();
+
+            Loaded += (sender, args) => { ((Model) DataContext).UpdateStream(File.OpenRead(@"c:\test.bin"), false); };
         }
 
         private void OnClosing(object sender, CancelEventArgs e)
