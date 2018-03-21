@@ -25,13 +25,6 @@
             Command="{Binding Commands.Open}"
             Modifiers="Control" />
     </Window.InputBindings>
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ToolbarStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
 
     <Window.DataContext>
         <local:Model CloseRequest="OnCloseRequest" />
@@ -48,7 +41,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Menu>
@@ -62,11 +54,6 @@
                     Header="E_xit" />
             </MenuItem>
         </Menu>
-        <ToolBarTray
-            Grid.Row="1"
-            Style="{DynamicResource ToolBarTrayStyle1}">
-            <ToolBar Style="{DynamicResource ToolBarStyle1}" />
-        </ToolBarTray>
         <ScrollViewer
             Grid.Row="2"
             HorizontalScrollBarVisibility="Auto"
