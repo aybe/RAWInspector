@@ -40,22 +40,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="_File">
-                <MenuItem
-                    Command="{Binding Commands.Open}"
-                    Header="_Open"
-                    InputGestureText="Ctrl+O" />
-                <MenuItem
-                    Command="{Binding Commands.Close}"
-                    Header="E_xit" />
-            </MenuItem>
-        </Menu>
         <ScrollViewer
-            Grid.Row="2"
             HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Auto">
             <i:Interaction.Behaviors>
