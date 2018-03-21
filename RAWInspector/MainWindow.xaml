@@ -24,6 +24,9 @@
             Key="O"
             Command="{Binding Commands.Open}"
             Modifiers="Control" />
+        <KeyBinding
+            Key="Escape"
+            Command="{Binding Commands.Close}" />
     </Window.InputBindings>
 
     <Window.DataContext>
