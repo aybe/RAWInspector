@@ -5,14 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Help"
-    Width="500"
-    Height="333"
-    ResizeMode="NoResize"
+    Width="485"
+    KeyDown="HelpWindow_OnKeyDown"
+    SizeToContent="Height"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="ToolWindow"
     mc:Ignorable="d">
+
     <Grid>
-        <RichTextBox FontFamily="Courier New" IsReadOnly="True">
+        <RichTextBox
+            HorizontalContentAlignment="Center"
+            FontFamily="/RAWInspector;component/Fonts/#Segoe UI Mono"
+            IsReadOnly="True">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="                        F2 : decrease width by 1 pixel" />
@@ -27,13 +32,13 @@
                     <LineBreak />
                     <Run Text="                Shift + F4 : decrease offset by 10 pixels" />
                     <LineBreak />
-                    <Run Text="         Ctrl + Shift + F4 : decrease offset by 100 pixels" />
+                    <Run Text="         Ctrl + Shift + F4 : decrease offset by 'width' pixels" />
                     <LineBreak />
                     <Run Text="                        F5 : increase offset by 1 pixel" />
                     <LineBreak />
                     <Run Text="                Shift + F5 : increase offset by 10 pixels" />
                     <LineBreak />
-                    <Run Text="         Ctrl + Shift + F5 : increase offset by 100 pixels" />
+                    <Run Text="         Ctrl + Shift + F5 : increase offset by 'width' pixels" />
                     <LineBreak />
                     <Run Text="                        F6 : decrease zoom by 100%" />
                     <LineBreak />
@@ -50,6 +55,8 @@
                     <Run Text="Alt + Shift + Ctrl + Wheel : change width by 10 pixels" />
                     <LineBreak />
                     <Run Text="      Mouse + (hold) Wheel : pan (each modifier held speeds up)" />
+                    <LineBreak />
+                    <Run Text="              (hold) Shift : disable info update" />
                     <LineBreak />
                     <Run Text="       Ctrl + O, file drop : open file" />
                     <LineBreak />

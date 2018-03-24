@@ -15,130 +15,224 @@
         <controls:LegendTable VerticalAlignment="Top">
 
             <controls:LegendTable.Resources>
+
+                <FontFamily x:Key="FontFamily">/RAWInspector;component/Fonts/#Segoe UI Mono</FontFamily>
+
                 <system:String x:Key="NotAvail">N/A</system:String>
-                <Style x:Key="Header1Label" TargetType="{x:Type Label}">
+
+                <Style x:Key="HeaderLabel" TargetType="{x:Type Label}">
                     <Setter Property="FontWeight" Value="Bold" />
                 </Style>
-                <Style x:Key="Header2Label" TargetType="{x:Type Label}">
-                    <Setter Property="Margin" Value="5,0,0,0" />
-                    <Setter Property="FontWeight" Value="Bold" />
+
+                <Style x:Key="ValueLabel" TargetType="{x:Type Label}">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="Padding" Value="5,3,5,2" />
                 </Style>
-                <Style x:Key="TypeLabel" TargetType="{x:Type Label}">
-                    <Setter Property="Margin" Value="10,0,0,0" />
-                </Style>
-                <Style x:Key="NumberLabel" TargetType="{x:Type Label}">
-                    <Setter Property="HorizontalContentAlignment" Value="Right" />
+
+                <Style
+                    x:Key="TypeLabel"
+                    BasedOn="{StaticResource ValueLabel}"
+                    TargetType="{x:Type Label}" />
+
+                <Style
+                    x:Key="NumberLabel"
+                    BasedOn="{StaticResource ValueLabel}"
+                    TargetType="{x:Type Label}">
                     <Setter Property="ContentStringFormat" Value="N0" />
                 </Style>
+
+                <Style
+                    x:Key="UnsignedBeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Unsigned" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="Red"
+                                    Text="BE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style
+                    x:Key="SignedBeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Signed" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="Red"
+                                    Text="BE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style
+                    x:Key="HexBeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Hex" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="Red"
+                                    Text="BE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style
+                    x:Key="UnsignedLeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Unsigned" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="DodgerBlue"
+                                    Text="LE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style
+                    x:Key="SignedLeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Signed" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="DodgerBlue"
+                                    Text="LE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style
+                    x:Key="HexLeStyle"
+                    x:Shared="False"
+                    BasedOn="{StaticResource TypeLabel}"
+                    TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock>
+                                <Run Text="Hex" />
+                                <Run
+                                    FontFamily="{StaticResource FontFamily}"
+                                    Foreground="DodgerBlue"
+                                    Text="LE" />
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
             </controls:LegendTable.Resources>
 
-            <Label Content="Bitmap" Style="{StaticResource Header1Label}" />
-            <Label Content=" " />
+            <Label Content="Bitmap" Style="{StaticResource HeaderLabel}" />
+            <Label />
+            <Label Content="X" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding Data.X, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Content="Y" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding Data.Y, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Content="File offset" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding BitmapOffset}" Style="{StaticResource NumberLabel}" />
+            <Label Content="Real offset" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Content="Image offset" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding Data.OffsetImage, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Width" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding BitmapWidth}" Style="{StaticResource NumberLabel}" />
             <Label Content="Height" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding BitmapHeight}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Offset" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding BitmapOffset}" Style="{StaticResource NumberLabel}" />
             <Label Content="Zoom" Style="{StaticResource TypeLabel}" />
             <Label
                 Content="{Binding BitmapZoom}"
                 ContentStringFormat="#0%"
                 Style="{StaticResource NumberLabel}" />
+            <Label />
+            <Label />
 
-
-            <Label Content="Mouse" Style="{StaticResource Header1Label}" />
-            <Label Content=" " />
-            <Label Content="X" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.X, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Y" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Y, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Offset (image)" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.OffsetImage, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Offset (file)" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-
-
-            <Label Content="Byte" Style="{StaticResource Header1Label}" />
-            <Label Content=" " />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int8, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Content="8-bit" Style="{StaticResource HeaderLabel}" />
+            <Label />
             <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding Data.UInt8, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
+            <Label Content="{Binding Data.Int8, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Hex" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding Data.UInt8Hex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label />
+            <Label />
 
-            <Label Content="Big-Endian" Style="{StaticResource Header1Label}" />
+            <Label Content="16-bit" Style="{StaticResource HeaderLabel}" />
             <Label />
-            <Label
-                Content="16-bit"
-                Foreground="Red"
-                Style="{StaticResource Header2Label}" />
-            <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int16BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource UnsignedBeStyle}" />
             <Label Content="{Binding Data.UInt16BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource SignedBeStyle}" />
+            <Label Content="{Binding Data.Int16BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexBeStyle}" />
             <Label Content="{Binding Data.UInt16BEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label
-                Content="32-bit"
-                Foreground="Green"
-                Style="{StaticResource Header2Label}" />
-            <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int32BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.UInt32BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.UInt32BEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label
-                Content="64-bit"
-                Foreground="DodgerBlue"
-                Style="{StaticResource Header2Label}" />
-            <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int64BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.UInt64BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.UInt64BEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-
-
-            <Label Content="Little-Endian" Style="{StaticResource Header1Label}" />
-            <Label />
-            <Label
-                Content="16-bit"
-                Foreground="Red"
-                Style="{StaticResource Header2Label}" />
-            <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int16LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource UnsignedLeStyle}" />
             <Label Content="{Binding Data.UInt16LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource SignedLeStyle}" />
+            <Label Content="{Binding Data.Int16LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexLeStyle}" />
             <Label Content="{Binding Data.UInt16LEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label
-                Content="32-bit"
-                Foreground="Green"
-                Style="{StaticResource Header2Label}" />
             <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int32LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
+            <Label />
+
+            <Label Content="32-bit" Style="{StaticResource HeaderLabel}" />
+            <Label />
+            <Label Style="{StaticResource UnsignedBeStyle}" />
+            <Label Content="{Binding Data.UInt32BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource SignedBeStyle}" />
+            <Label Content="{Binding Data.Int32BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexBeStyle}" />
+            <Label Content="{Binding Data.UInt32BEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource UnsignedLeStyle}" />
             <Label Content="{Binding Data.UInt32LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource SignedLeStyle}" />
+            <Label Content="{Binding Data.Int32LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexLeStyle}" />
             <Label Content="{Binding Data.UInt32LEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label
-                Content="64-bit"
-                Foreground="DodgerBlue"
-                Style="{StaticResource Header2Label}" />
             <Label />
-            <Label Content="Signed" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.Int64LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Unsigned" Style="{StaticResource TypeLabel}" />
+            <Label />
+
+            <Label Content="64-bit" Style="{StaticResource HeaderLabel}" />
+            <Label />
+            <Label Style="{StaticResource UnsignedBeStyle}" />
+            <Label Content="{Binding Data.UInt64BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource SignedBeStyle}" />
+            <Label Content="{Binding Data.Int64BE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexBeStyle}" />
+            <Label Content="{Binding Data.UInt64BEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource UnsignedLeStyle}" />
             <Label Content="{Binding Data.UInt64LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Hex" Style="{StaticResource TypeLabel}" />
+            <Label Style="{StaticResource SignedLeStyle}" />
+            <Label Content="{Binding Data.Int64LE, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label Style="{StaticResource HexLeStyle}" />
             <Label Content="{Binding Data.UInt64LEHex, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
 
         </controls:LegendTable>

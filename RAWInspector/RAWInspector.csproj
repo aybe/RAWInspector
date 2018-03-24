@@ -80,6 +80,7 @@
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IWindowService.cs" />
     <Compile Include="ModelCommands.cs" />
     <Compile Include="Utils\Pattern.cs" />
     <Compile Include="Controls\LegendTable.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Utils\Storage.cs" />
     <Compile Include="Controls\MouseWheelGesture.cs" />
     <Compile Include="Controls\MouseWheelDirection.cs" />
+    <Compile Include="WindowService.cs" />
     <Page Include="Controls\InfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +150,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\SegoeUIMono-Regular.TTF" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

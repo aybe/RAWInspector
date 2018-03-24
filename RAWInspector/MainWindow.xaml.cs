@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -12,11 +13,14 @@ namespace RAWInspector
         {
             InitializeComponent();
 
-            Loaded += (sender, args) =>
+            if (Debugger.IsAttached)
             {
-                var model = (Model) DataContext;
-                model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
-            };
+                Loaded += (sender, args) =>
+                {
+                    var model = (Model) DataContext;
+                    model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
+                };
+            }
         }
 
         private void OnClosing(object sender, CancelEventArgs e)

@@ -37,12 +37,6 @@ namespace RAWInspector
             };
         }
 
-        #region Public read-only properties
-
-        public ModelCommands Commands { get; }
-
-        #endregion
-
         #region IDisposable Members
 
         public void Dispose()
@@ -120,11 +114,15 @@ namespace RAWInspector
             set => Set(ref _bitmapZoom, Math.Max(1, Math.Min(100, value)));
         }
 
+        public ModelCommands Commands { get; }
+
         public ModelData Data
         {
             get => _data;
             set => Set(ref _data, value);
         }
+
+        public IWindowService WindowService { get; set; }
 
         #endregion
 
@@ -145,7 +143,7 @@ namespace RAWInspector
         {
             BitmapOffset = 0;
             BitmapWidth = 128;
-            BitmapZoom = 1;
+            BitmapZoom = 4;
         }
 
         private void UpdateBitmap()

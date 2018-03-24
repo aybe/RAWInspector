@@ -160,13 +160,13 @@ namespace RAWInspector.Controls
             var direction = InvertMouseWrap ? +1.0d : -1.0d;
 
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
-                direction *= 2.0d;
+                direction *= 3.0d;
 
             if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None)
-                direction *= 2.0d;
+                direction *= 3.0d;
 
             if ((Keyboard.Modifiers & ModifierKeys.Alt) != ModifierKeys.None)
-                direction *= 2.0d;
+                direction *= 3.0d;
 
             var x = mouse.LastX * direction + viewer.HorizontalOffset;
             var y = mouse.LastY * direction + viewer.VerticalOffset;

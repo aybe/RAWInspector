@@ -16,7 +16,7 @@ namespace RAWInspector
         {
             Model = model ?? throw new ArgumentNullException(nameof(model));
 
-            Close = new ModelCommand<EventArgs>(s => { Model.OnClose(); });
+            Close = new ModelCommand<EventArgs>(s => { Model.WindowService?.Quit(); });
 
             Drop = new ModelCommand<DragEventArgs>(e =>
             {
@@ -29,18 +29,34 @@ namespace RAWInspector
                 TryOpenFile(path);
             });
 
-            Help = new ModelCommand(() => { new HelpWindow().ShowDialog(); });
+            Help = new ModelCommand(() => { Model.WindowService?.ShowHelp(); });
 
             Open = new ModelCommand(() =>
             {
                 var dialog = new OpenFileDialog();
-                if (dialog.ShowDialog() != true)
-                    return;
-
-                TryOpenFile(dialog.FileName);
+                if (dialog.ShowDialog() == true)
+                    TryOpenFile(dialog.FileName);
             });
 
-            SetBitmapOffset = new ModelCommand<int>(s => { Model.BitmapOffset += s; });
+            SetBitmapOffset = new ModelCommand<int>(s =>
+            {
+                int i;
+
+                switch (s)
+                {
+                    case int.MinValue:
+                        i = -Model.BitmapWidth;
+                        break;
+                    case int.MaxValue:
+                        i = +Model.BitmapWidth;
+                        break;
+                    default:
+                        i = s;
+                        break;
+                }
+
+                Model.BitmapOffset += i;
+            });
 
             SetBitmapWidth = new ModelCommand<int>(s => { Model.BitmapWidth += s; });
 
@@ -50,6 +66,9 @@ namespace RAWInspector
 
             UpdateData = new ModelCommand(() =>
             {
+                if ((Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
+                    return;
+
                 if (Mouse.DirectlyOver is Image image && image.Tag as string == BitmapControl.ControlKey)
                 {
                     var p = Mouse.GetPosition(image);
