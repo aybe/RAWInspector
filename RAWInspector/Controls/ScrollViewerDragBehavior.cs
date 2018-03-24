@@ -6,16 +6,33 @@ using System.Windows.Interactivity;
 using JetBrains.Annotations;
 using RAWInspector.Interop.Mouse;
 
-namespace RAWInspector.Classes
+namespace RAWInspector.Controls
 {
     public sealed class ScrollViewerDragBehavior : Behavior<ScrollViewer>
     {
         public static readonly DependencyProperty InvertMouseWrapProperty =
-            DependencyProperty.Register(nameof(InvertMouseWrap), typeof(bool), typeof(ScrollViewerDragBehavior),
-                new PropertyMetadata(default(bool)));
+            DependencyProperty.Register(
+                nameof(InvertMouseWrap),
+                typeof(bool),
+                typeof(ScrollViewerDragBehavior),
+                new PropertyMetadata(false)
+            );
 
-        public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register(
-            nameof(IsEnabled), typeof(bool), typeof(ScrollViewerDragBehavior), new PropertyMetadata(true));
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.Register(
+                nameof(IsEnabled),
+                typeof(bool),
+                typeof(ScrollViewerDragBehavior),
+                new PropertyMetadata(true)
+            );
+
+        public static readonly DependencyProperty ButtonProperty =
+            DependencyProperty.Register(
+                nameof(Button),
+                typeof(MouseButton),
+                typeof(ScrollViewerDragBehavior),
+                new PropertyMetadata(MouseButton.Middle)
+            );
 
         [PublicAPI]
         public bool InvertMouseWrap
@@ -31,16 +48,24 @@ namespace RAWInspector.Classes
             set => SetValue(IsEnabledProperty, value);
         }
 
+        [PublicAPI]
+        public MouseButton Button
+        {
+            get => (MouseButton) GetValue(ButtonProperty);
+            set => SetValue(ButtonProperty, value);
+        }
+
         private bool IsEnabledInternal { get; set; }
 
-        [NotNull] private Window Window => Window.GetWindow(AssociatedObject) ?? throw new ArgumentNullException();
+        private bool IsSubscribed { get; set; }
+
+        private Window Window { get; set; }
+
 
         protected override void OnAttached()
         {
             AssociatedObject.PreviewMouseDown += AssociatedObject_PreviewMouseDown;
             AssociatedObject.PreviewMouseUp += AssociatedObject_PreviewMouseUp;
-
-            Window.SourceInitialized += (sender, e) => RawMouseHelper.Subscribe((Window) sender, WndProc);
         }
 
         protected override void OnDetaching()
@@ -48,11 +73,12 @@ namespace RAWInspector.Classes
             AssociatedObject.PreviewMouseDown -= AssociatedObject_PreviewMouseDown;
             AssociatedObject.PreviewMouseUp -= AssociatedObject_PreviewMouseUp;
 
-            RawMouseHelper.Unsubscribe(Window, WndProc);
+            Unsubscribe();
         }
 
         private void AssociatedObject_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            Subscribe();
             UpdateEnabledState(e);
         }
 
@@ -61,9 +87,52 @@ namespace RAWInspector.Classes
             UpdateEnabledState(e);
         }
 
+        private void Subscribe()
+        {
+            if (IsSubscribed)
+                return;
+
+            Window = Window.GetWindow(AssociatedObject);
+
+            if (Window == null)
+                throw new ArgumentNullException(nameof(Window));
+
+            RawMouseHelper.Subscribe(Window, WndProc);
+
+            IsSubscribed = true;
+        }
+
+        private void Unsubscribe()
+        {
+            RawMouseHelper.Unsubscribe(Window, WndProc);
+        }
+
         private void UpdateEnabledState(MouseEventArgs e)
         {
-            IsEnabledInternal = e.MiddleButton == MouseButtonState.Pressed;
+            MouseButtonState button;
+
+            switch (Button)
+            {
+                case MouseButton.Left:
+                    button = e.LeftButton;
+                    break;
+                case MouseButton.Middle:
+                    button = e.MiddleButton;
+                    break;
+                case MouseButton.Right:
+                    button = e.RightButton;
+                    break;
+                case MouseButton.XButton1:
+                    button = e.XButton1;
+                    break;
+                case MouseButton.XButton2:
+                    button = e.XButton2;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            IsEnabledInternal = button == MouseButtonState.Pressed;
 
             Mouse.Capture(IsEnabledInternal ? AssociatedObject : null);
         }
@@ -89,6 +158,16 @@ namespace RAWInspector.Classes
 
             var viewer = AssociatedObject;
             var direction = InvertMouseWrap ? +1.0d : -1.0d;
+
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
+                direction *= 2.0d;
+
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None)
+                direction *= 2.0d;
+
+            if ((Keyboard.Modifiers & ModifierKeys.Alt) != ModifierKeys.None)
+                direction *= 2.0d;
+
             var x = mouse.LastX * direction + viewer.HorizontalOffset;
             var y = mouse.LastY * direction + viewer.VerticalOffset;
             var xMax = viewer.ScrollableWidth;

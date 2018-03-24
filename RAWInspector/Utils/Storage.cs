@@ -3,8 +3,9 @@ using System.IO;
 using System.Windows;
 using JetBrains.Annotations;
 
-namespace RAWInspector
+namespace RAWInspector.Utils
 {
+    [PublicAPI]
     internal static class Storage
     {
         public static string GetTempPath([NotNull] string path)
@@ -15,7 +16,7 @@ namespace RAWInspector
             var tempPath = Path.GetTempPath();
             var fileName = Path.GetFileName(path);
 
-            for (var i = 0; i < Byte.MaxValue; i++)
+            for (var i = 0; i < byte.MaxValue; i++)
             {
                 var combine = Path.Combine(tempPath, $"{fileName}.{i}");
 
@@ -55,7 +56,7 @@ namespace RAWInspector
             try
             {
                 var fileName = Path.GetFileName(path);
-                var tempPath = Storage.GetTempPath(fileName);
+                var tempPath = GetTempPath(fileName);
                 File.Copy(path, tempPath);
                 temporary = true;
                 stream = File.OpenRead(tempPath);

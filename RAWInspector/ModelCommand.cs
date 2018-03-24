@@ -1,8 +1,10 @@
 ﻿using System;
 using GalaSoft.MvvmLight.CommandWpf;
+using JetBrains.Annotations;
 
 namespace RAWInspector
 {
+    [PublicAPI]
     internal sealed class ModelCommand : RelayCommand
     {
         public ModelCommand(Action execute, bool keepTargetAlive = false)
@@ -16,6 +18,7 @@ namespace RAWInspector
         }
     }
 
+    [PublicAPI]
     internal sealed class ModelCommand<T> : RelayCommand<T>
     {
         public ModelCommand(Action<T> execute, bool keepTargetAlive = false)

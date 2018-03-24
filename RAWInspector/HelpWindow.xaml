@@ -1,0 +1,63 @@
+﻿<Window
+    x:Class="RAWInspector.HelpWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Help"
+    Width="500"
+    Height="333"
+    ResizeMode="NoResize"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <RichTextBox FontFamily="Courier New" IsReadOnly="True">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="                        F2 : decrease width by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="                Shift + F2 : decrease width by 10 pixels" />
+                    <LineBreak />
+                    <Run Text="                        F3 : increase width by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="                Shift + F3 : increase width by 10 pixels" />
+                    <LineBreak />
+                    <Run Text="                        F4 : decrease offset by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="                Shift + F4 : decrease offset by 10 pixels" />
+                    <LineBreak />
+                    <Run Text="         Ctrl + Shift + F4 : decrease offset by 100 pixels" />
+                    <LineBreak />
+                    <Run Text="                        F5 : increase offset by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="                Shift + F5 : increase offset by 10 pixels" />
+                    <LineBreak />
+                    <Run Text="         Ctrl + Shift + F5 : increase offset by 100 pixels" />
+                    <LineBreak />
+                    <Run Text="                        F6 : decrease zoom by 100%" />
+                    <LineBreak />
+                    <Run Text="                        F7 : increase zoom by 100%" />
+                    <LineBreak />
+                    <Run Text="                     Wheel : scroll vertically" />
+                    <LineBreak />
+                    <Run Text="             Shift + Wheel : scroll horizontally" />
+                    <LineBreak />
+                    <Run Text="              Ctrl + Wheel : change zoom by 100%" />
+                    <LineBreak />
+                    <Run Text="      Shift + Ctrl + Wheel : change width by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="Alt + Shift + Ctrl + Wheel : change width by 10 pixels" />
+                    <LineBreak />
+                    <Run Text="      Mouse + (hold) Wheel : pan (each modifier held speeds up)" />
+                    <LineBreak />
+                    <Run Text="       Ctrl + O, file drop : open file" />
+                    <LineBreak />
+                    <Run Text="                         R : reset to default view" />
+                    <LineBreak />
+                    <Run Text="                       ESC : quit" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>

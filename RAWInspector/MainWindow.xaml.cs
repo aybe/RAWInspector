@@ -12,7 +12,11 @@ namespace RAWInspector
         {
             InitializeComponent();
 
-            Loaded += (sender, args) => { ((Model) DataContext).UpdateStream(File.OpenRead(@"c:\test.bin"), false); };
+            Loaded += (sender, args) =>
+            {
+                var model = (Model) DataContext;
+                model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
+            };
         }
 
         private void OnClosing(object sender, CancelEventArgs e)

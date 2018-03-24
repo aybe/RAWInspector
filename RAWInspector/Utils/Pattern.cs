@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace RAWInspector.Classes
+namespace RAWInspector.Utils
 {
     [PublicAPI]
     public struct Pattern : IReadOnlyList<byte>
     {
+        public static Pattern Cd { get; } = new Pattern("CD", new byte[] {0xCD});
+
         public static Pattern CafeBabe { get; } = new Pattern("CAFEBABE", new byte[] {0xCA, 0xFE, 0xBA, 0xBE});
 
         public static Pattern DeadBabe { get; } = new Pattern("DEADBABE", new byte[] {0xDE, 0xAD, 0xBA, 0xBE});
