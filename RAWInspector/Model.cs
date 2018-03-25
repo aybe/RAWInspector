@@ -154,13 +154,13 @@ namespace RAWInspector
 
             var offset = BitmapOffset;
             var bytesBefore = offset < 0 ? Math.Abs(offset) : 0;
-            var bytesStream = (int) Math.Max(0, stream.Length - Math.Max(0, offset));
+            var bytesStream = Math.Max(0, stream.Length - Math.Max(0, offset));
             var bytes = bytesBefore + bytesStream;
 
             var format = PixelFormats.Indexed8;
             var width = BitmapWidth;
             var stride = width * ((format.BitsPerPixel + 7) / 8);
-            var height = Math.Max(1, Math.Min(32000, bytes / stride + (bytes % stride == 0 ? 0 : 1)));
+            var height = (int) Math.Max(1, Math.Min(4096, bytes / stride + (bytes % stride == 0 ? 0 : 1)));
             var pixels = new byte[stride * height];
             var pattern = Pattern.DeadBeef;
 
@@ -169,7 +169,7 @@ namespace RAWInspector
 
             stream.Position = Math.Max(0, offset);
 
-            var read = stream.Read(pixels, bytesBefore, Math.Min(pixels.Length, Math.Max(0, bytesStream)));
+            var read = stream.Read(pixels, bytesBefore, (int) Math.Min(pixels.Length - bytesBefore, bytesStream));
 
             for (var i = 0; i < pixels.Length - bytes; i++)
                 pixels[bytesBefore + read + i] = pattern[i % pattern.Count];
