@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\WidthToOffsetConverter.cs" />
     <Compile Include="Controls\BidirectionalScrollViewer.cs" />
     <Compile Include="Controls\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>

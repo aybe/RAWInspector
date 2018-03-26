@@ -32,13 +32,17 @@
                     <LineBreak />
                     <Run Text="                Shift + F4 : decrease offset by 10 pixels" />
                     <LineBreak />
-                    <Run Text="         Ctrl + Shift + F4 : decrease offset by 'width' pixels" />
+                    <Run Text="         Ctrl + Shift + F4 : decrease offset by 1 line" />
+                    <LineBreak />
+                    <Run Text="   Alt + Ctrl + Shift + F4 : decrease offset by 10 lines" />
                     <LineBreak />
                     <Run Text="                        F5 : increase offset by 1 pixel" />
                     <LineBreak />
                     <Run Text="                Shift + F5 : increase offset by 10 pixels" />
                     <LineBreak />
-                    <Run Text="         Ctrl + Shift + F5 : increase offset by 'width' pixels" />
+                    <Run Text="         Ctrl + Shift + F5 : increase offset by 1 line" />
+                    <LineBreak />
+                    <Run Text="   Alt + Ctrl + Shift + F5 : increase offset by 10 lines" />
                     <LineBreak />
                     <Run Text="                        F6 : decrease zoom by 100%" />
                     <LineBreak />

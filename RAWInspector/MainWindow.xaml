@@ -21,6 +21,10 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
+    <Window.Resources>
+        <controls:WidthToOffsetConverter x:Key="WidthToOffsetConverter" />
+    </Window.Resources>
+
     <Window.InputBindings>
 
         <KeyBinding
@@ -64,8 +68,33 @@
         <KeyBinding
             Key="F4"
             Command="{Binding Commands.SetBitmapOffset}"
-            CommandParameter="{x:Static system:Int32.MinValue}"
-            Modifiers="Ctrl+Shift" />
+            Modifiers="Ctrl+Shift">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>-1</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
+        <KeyBinding
+            Key="F4"
+            Command="{Binding Commands.SetBitmapOffset}"
+            Modifiers="Ctrl+Shift+Alt">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>-10</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
         <KeyBinding
             Key="F5"
             Command="{Binding Commands.SetBitmapOffset}"
@@ -78,8 +107,33 @@
         <KeyBinding
             Key="F5"
             Command="{Binding Commands.SetBitmapOffset}"
-            CommandParameter="{x:Static system:Int32.MaxValue}"
-            Modifiers="Ctrl+Shift" />
+            Modifiers="Ctrl+Shift">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>+1</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
+        <KeyBinding
+            Key="F5"
+            Command="{Binding Commands.SetBitmapOffset}"
+            Modifiers="Ctrl+Shift+Alt">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>+10</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
 
         <KeyBinding
             Key="F6"
