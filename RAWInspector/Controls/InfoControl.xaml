@@ -41,6 +41,13 @@
                     <Setter Property="ContentStringFormat" Value="N0" />
                 </Style>
 
+                <Style x:Key="NumericTextBox" TargetType="TextBox">
+                    <Setter Property="Width" Value="65" />
+                    <Setter Property="Margin" Value="5,3,3,2" />
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="TextAlignment" Value="Right" />
+                </Style>
+
                 <Style
                     x:Key="UnsignedBeStyle"
                     x:Shared="False"
@@ -161,7 +168,7 @@
                 Content="Extra offset"
                 Style="{StaticResource TypeLabel}"
                 ToolTip="The extra offset to add to the file (can be negative)." />
-            <Label Content="{Binding BitmapOffset}" Style="{StaticResource NumberLabel}" />
+            <TextBox Style="{StaticResource NumericTextBox}" Text="{Binding BitmapOffset, UpdateSourceTrigger=PropertyChanged}" />
             <Label
                 Content="View offset"
                 Style="{StaticResource TypeLabel}"
@@ -173,7 +180,7 @@
                 ToolTip="The offset of the pixel under the mouse in the file, if applicable." />
             <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Width" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding BitmapWidth}" Style="{StaticResource NumberLabel}" />
+            <TextBox Style="{StaticResource NumericTextBox}" Text="{Binding BitmapWidth, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Height" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding BitmapHeight}" Style="{StaticResource NumberLabel}" />
             <Label Content="Zoom" Style="{StaticResource TypeLabel}" />
