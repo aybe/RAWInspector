@@ -164,7 +164,7 @@ namespace RAWInspector
             var pixels = new byte[stride * height];
             var pattern = Pattern.DeadBeef;
 
-            for (var i = 0; i < -offset; i++)
+            for (var i = 0; i < Math.Min(pixels.Length - 1, -offset); i++)
                 pixels[i] = pattern[i % pattern.Count];
 
             stream.Position = Math.Max(0, offset);
