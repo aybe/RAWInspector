@@ -78,6 +78,7 @@
     <Compile Include="Controls\BitmapControl.xaml.cs">
       <DependentUpon>BitmapControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IntegerValidationRule.cs" />
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>

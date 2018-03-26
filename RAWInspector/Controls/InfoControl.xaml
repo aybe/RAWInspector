@@ -42,10 +42,16 @@
                 </Style>
 
                 <Style x:Key="NumericTextBox" TargetType="TextBox">
-                    <Setter Property="Width" Value="65" />
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Width" Value="75" />
                     <Setter Property="Margin" Value="5,3,3,2" />
                     <Setter Property="HorizontalAlignment" Value="Right" />
                     <Setter Property="TextAlignment" Value="Right" />
+
                 </Style>
 
                 <Style
@@ -168,7 +174,15 @@
                 Content="Extra offset"
                 Style="{StaticResource TypeLabel}"
                 ToolTip="The extra offset to add to the file (can be negative)." />
-            <TextBox Style="{StaticResource NumericTextBox}" Text="{Binding BitmapOffset, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Style="{StaticResource NumericTextBox}">
+                <TextBox.Text>
+                    <Binding Path="BitmapOffset" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <controls:IntegerValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label
                 Content="View offset"
                 Style="{StaticResource TypeLabel}"
@@ -180,7 +194,15 @@
                 ToolTip="The offset of the pixel under the mouse in the file, if applicable." />
             <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Width" Style="{StaticResource TypeLabel}" />
-            <TextBox Style="{StaticResource NumericTextBox}" Text="{Binding BitmapWidth, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Style="{StaticResource NumericTextBox}">
+                <TextBox.Text>
+                    <Binding Path="BitmapWidth" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <controls:IntegerValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Content="Height" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding BitmapHeight}" Style="{StaticResource NumberLabel}" />
             <Label Content="Zoom" Style="{StaticResource TypeLabel}" />
