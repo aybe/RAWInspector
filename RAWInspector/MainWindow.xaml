@@ -194,6 +194,96 @@
             </MouseBinding.Gesture>
         </MouseBinding>
 
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}" CommandParameter="-1">
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Up"
+                    Modifiers="Alt"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}" CommandParameter="+1">
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Down"
+                    Modifiers="Alt"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}">
+            <MouseBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>-1</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </MouseBinding.CommandParameter>
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Up"
+                    Modifiers="Alt+Shift"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}">
+            <MouseBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>+1</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </MouseBinding.CommandParameter>
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Down"
+                    Modifiers="Alt+Shift"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}">
+            <MouseBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>-10</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </MouseBinding.CommandParameter>
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Up"
+                    Modifiers="Alt+Ctrl"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+        <MouseBinding Command="{Binding Commands.SetBitmapOffset}">
+            <MouseBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource WidthToOffsetConverter}">
+                    <Binding Path="BitmapWidth" />
+                    <Binding>
+                        <Binding.Source>
+                            <system:Int32>+10</system:Int32>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </MouseBinding.CommandParameter>
+            <MouseBinding.Gesture>
+                <controls:MouseWheelGesture
+                    Direction="Down"
+                    Modifiers="Alt+Ctrl"
+                    MouseAction="WheelClick" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
     </Window.InputBindings>
 
     <Window.DataContext>

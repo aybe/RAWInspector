@@ -58,6 +58,12 @@
                     <LineBreak />
                     <Run Text="Alt + Shift + Ctrl + Wheel : change width by 10 pixels" />
                     <LineBreak />
+                    <Run Text="               Alt + Wheel : change offset by 1 pixel" />
+                    <LineBreak />
+                    <Run Text="       Shift + Alt + Wheel : change offset by 1 line" />
+                    <LineBreak />
+                    <Run Text="        Ctrl + Alt + Wheel : change offset by 10 lines" />
+                    <LineBreak />
                     <Run Text="      Mouse + (hold) Wheel : pan (each modifier held speeds up)" />
                     <LineBreak />
                     <Run Text="              (hold) Shift : disable info update" />
