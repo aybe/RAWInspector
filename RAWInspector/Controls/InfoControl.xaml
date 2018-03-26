@@ -178,7 +178,7 @@
                 <TextBox.Text>
                     <Binding Path="BitmapOffset" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <controls:IntegerValidationRule />
+                            <controls:IntegerValidationRule Max="{x:Static system:Int32.MaxValue}" Min="{x:Static system:Int32.MinValue}" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -198,7 +198,7 @@
                 <TextBox.Text>
                     <Binding Path="BitmapWidth" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <controls:IntegerValidationRule />
+                            <controls:IntegerValidationRule Max="{x:Static rawInspector:Model.MaxBitmapWidth}" Min="{x:Static rawInspector:Model.MinBitmapWidth}" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>

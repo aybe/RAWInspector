@@ -12,6 +12,9 @@ namespace RAWInspector
 {
     internal sealed class Model : ViewModelBase, IDisposable
     {
+        public const int MinBitmapWidth = 1;
+        public const int MaxBitmapWidth = 4096;
+
         public Model()
         {
             Commands = new ModelCommands(this);
@@ -105,7 +108,7 @@ namespace RAWInspector
         public int BitmapWidth
         {
             get => _bitmapWidth;
-            set => Set(ref _bitmapWidth, Math.Max(1, Math.Min(4096, value)));
+            set => Set(ref _bitmapWidth, Math.Max(MinBitmapWidth, Math.Min(MaxBitmapWidth, value)));
         }
 
         public int BitmapZoom
