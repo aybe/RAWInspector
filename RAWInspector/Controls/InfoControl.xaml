@@ -157,12 +157,21 @@
             <Label Content="{Binding Data.X, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Y" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding Data.Y, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="File offset" Style="{StaticResource TypeLabel}" />
+            <Label
+                Content="Extra offset"
+                Style="{StaticResource TypeLabel}"
+                ToolTip="The extra offset to add to the file (can be negative)." />
             <Label Content="{Binding BitmapOffset}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Real offset" Style="{StaticResource TypeLabel}" />
-            <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
-            <Label Content="Image offset" Style="{StaticResource TypeLabel}" />
+            <Label
+                Content="View offset"
+                Style="{StaticResource TypeLabel}"
+                ToolTip="The offset of the pixel under the mouse in the view." />
             <Label Content="{Binding Data.OffsetImage, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
+            <Label
+                Content="File offset"
+                Style="{StaticResource TypeLabel}"
+                ToolTip="The offset of the pixel under the mouse in the file, if applicable." />
+            <Label Content="{Binding Data.OffsetFile, TargetNullValue={StaticResource NotAvail}}" Style="{StaticResource NumberLabel}" />
             <Label Content="Width" Style="{StaticResource TypeLabel}" />
             <Label Content="{Binding BitmapWidth}" Style="{StaticResource NumberLabel}" />
             <Label Content="Height" Style="{StaticResource TypeLabel}" />

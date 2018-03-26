@@ -316,7 +316,7 @@
                 <controls:InfoControl />
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Grid.Column="1" Header="Overview">
+        <GroupBox Grid.Column="1" Header="View">
             <controls:BitmapControl />
         </GroupBox>
     </Grid>
