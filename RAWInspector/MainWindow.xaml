@@ -9,7 +9,7 @@
     xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
     xmlns:rawInspector="clr-namespace:RAWInspector"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    Title="{Binding BitmapTitle, TargetNullValue='RAW Inspector (press F1 for help)'}"
+    Title="{Binding BitmapTitle, TargetNullValue='RAW Inspector'}"
     d:DataContext="{d:DesignInstance {x:Type rawInspector:Model}}"
     d:DesignHeight="300"
     d:DesignWidth="600"

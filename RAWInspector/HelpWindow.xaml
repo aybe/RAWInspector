@@ -7,6 +7,7 @@
     Title="Help"
     Width="485"
     KeyDown="HelpWindow_OnKeyDown"
+    ShowInTaskbar="False"
     SizeToContent="Height"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
