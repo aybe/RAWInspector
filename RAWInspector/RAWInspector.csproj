@@ -37,6 +37,9 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BinaryExtensions, Version=1.0.6749.33843, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BinaryExtensions.1.0.6749.33843\lib\net461\BinaryExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -164,12 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AppIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BinaryExtensions\BinaryExtensions\BinaryExtensions.csproj">
-      <Project>{35ed621c-ddc0-4939-a036-a0653521f61b}</Project>
-      <Name>BinaryExtensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
