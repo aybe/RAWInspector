@@ -17,8 +17,8 @@ namespace RAWInspector
             {
                 Loaded += (sender, args) =>
                 {
-                    var model = (Model) DataContext;
-                    model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
+                    // var model = (Model) DataContext;
+                    // model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
                 };
             }
         }
