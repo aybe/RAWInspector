@@ -9,7 +9,7 @@ It allows to get a quick overview of what's in a file and play with the stride a
 
 ![](.docs/gui.png)
 
-There's a strong emphasis on keyboard use, here's the help:
+There's a strong emphasis on keyboard use, here's the help (btw, it's the <kbd>F1</kbd> key):
 
 ![](.docs/help.png)
 
