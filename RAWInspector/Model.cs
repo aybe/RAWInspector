@@ -12,6 +12,7 @@ namespace RAWInspector
 {
     internal sealed class Model : ViewModelBase, IDisposable
     {
+        private const int MaxBitmapHeight = 65536;
         public const int MinBitmapWidth = 1;
         public const int MaxBitmapWidth = 4096;
 
@@ -163,7 +164,7 @@ namespace RAWInspector
             var format = PixelFormats.Indexed8;
             var width = BitmapWidth;
             var stride = width * ((format.BitsPerPixel + 7) / 8);
-            var height = (int) Math.Max(1, Math.Min(4096, bytes / stride + (bytes % stride == 0 ? 0 : 1)));
+            var height = (int) Math.Max(1, Math.Min(MaxBitmapHeight, bytes / stride + (bytes % stride == 0 ? 0 : 1)));
             var pixels = new byte[stride * height];
             var pattern = Pattern.DeadBeef;
 
