@@ -71,15 +71,25 @@ namespace RAWInspector
 
                 if (Mouse.DirectlyOver is Image image && image.Tag as string == BitmapControl.ControlKey)
                 {
-                    var p = Mouse.GetPosition(image);
-                    var x = (int) Math.Floor(p.X);
-                    var y = (int) Math.Floor(p.Y);
-                    Model.UpdateHoverInfo(x, y);
+                    var position = Mouse.GetPosition(image);
+                    UpdateHoverInfo(position);
                 }
                 else
                 {
                     Model.Data.Reset();
                 }
+            });
+
+            SetZeroPosition = new ModelCommand<Point>(s =>
+            {
+                UpdateHoverInfo(s);
+
+                var offset = Model.Data.OffsetFile;
+                if (offset == null)
+                    throw new ArgumentNullException(nameof(offset));
+
+                Model.BitmapOffset = offset.Value;
+                Model.ScrollInfo.SetVerticalOffset(0.0d);
             });
         }
 
@@ -101,6 +111,8 @@ namespace RAWInspector
 
         public ModelCommand<int> SetBitmapZoom { get; }
 
+        public ModelCommand<Point> SetZeroPosition { get; }
+
         public ModelCommand UpdateData { get; }
 
         private void TryOpenFile([NotNull] string path)
@@ -112,6 +124,13 @@ namespace RAWInspector
 
             if (stream != null)
                 Model.UpdateStream(stream, temporary);
+        }
+
+        private void UpdateHoverInfo(Point point)
+        {
+            var x = (int) Math.Floor(point.X);
+            var y = (int) Math.Floor(point.Y);
+            Model.UpdateHoverInfo(x, y);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿<UserControl
     x:Class="RAWInspector.Controls.BitmapControl"
+    x:Name="UserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:RAWInspector.Controls"
@@ -11,7 +12,9 @@
     UseLayoutRounding="True"
     mc:Ignorable="d">
     <Grid>
-        <controls:BidirectionalScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <controls:BidirectionalScrollViewer x:Name="Viewer"
+                                            HorizontalScrollBarVisibility="Auto"
+                                            VerticalScrollBarVisibility="Auto">
             <i:Interaction.Behaviors>
                 <controls:ScrollViewerDragBehavior />
             </i:Interaction.Behaviors>
@@ -21,7 +24,15 @@
                 RenderOptions.BitmapScalingMode="NearestNeighbor"
                 Source="{Binding Bitmap}"
                 Stretch="None"
-                Tag="{x:Static controls:BitmapControl.ControlKey}">
+                Tag="{x:Static controls:BitmapControl.ControlKey}"
+                MouseRightButtonDown="ImageOnMouseRightButtonDown">
+                <Image.ContextMenu>
+                    <ContextMenu x:Name="ContextMenu">
+                        <MenuItem Header="Set this position as zero"
+                                  Command="{Binding Commands.SetZeroPosition}"
+                                  CommandParameter="{Binding ElementName=UserControl, Path=Screen}" />
+                    </ContextMenu>
+                </Image.ContextMenu>
                 <Image.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding BitmapZoom}" ScaleY="{Binding BitmapZoom}" />
                 </Image.LayoutTransform>

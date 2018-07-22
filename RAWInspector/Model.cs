@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
@@ -81,6 +82,7 @@ namespace RAWInspector
         private int _bitmapWidth;
         private int _bitmapZoom;
         private ModelData _data;
+        private IScrollInfo _scrollInfo;
 
         public BitmapSource Bitmap
         {
@@ -124,6 +126,12 @@ namespace RAWInspector
         {
             get => _data;
             set => Set(ref _data, value);
+        }
+
+        public IScrollInfo ScrollInfo
+        {
+            get => _scrollInfo;
+            set => Set(ref _scrollInfo, value);
         }
 
         public IWindowService WindowService { get; set; }

@@ -1,10 +1,13 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace RAWInspector.Controls
 {
     internal sealed class BidirectionalScrollViewer : ScrollViewer
     {
+        public new IScrollInfo ScrollInfo => base.ScrollInfo;
+
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             if (e.Handled || ScrollInfo == null)
