@@ -13,14 +13,24 @@ namespace RAWInspector
         {
             InitializeComponent();
 
-            if (Debugger.IsAttached)
+            TryLoadDebugFile();
+        }
+
+        private void TryLoadDebugFile()
+        {
+            const string path = @"c:\rawinspector.testfile";
+
+            if (!File.Exists(path))
+                return;
+
+            if (!Debugger.IsAttached)
+                return;
+
+            Loaded += (sender, args) =>
             {
-                Loaded += (sender, args) =>
-                {
-                    // var model = (Model) DataContext;
-                    // model.UpdateStream(File.OpenRead(@"c:\testbig.bin"), false);
-                };
-            }
+                var model = (Model) DataContext;
+                model.UpdateStream(File.OpenRead(path), false);
+            };
         }
 
         private void OnClosing(object sender, CancelEventArgs e)
